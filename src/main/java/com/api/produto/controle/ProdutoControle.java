@@ -60,12 +60,11 @@ public class ProdutoControle {
     public @ResponseBody RespostaModelo deleteById(@PathVariable Integer id) {
         RespostaModelo resp = new RespostaModelo();
         try {
-            if (filtrar(id).isPresent()) {
-                deleteById(id);
-                resp.setMsg("Removido com sucesso!");
-            }
+            Optional<ProdutoModelo> obj = filtrar(id);
+            acoes.deleteById(obj.get().getId());
+            resp.setMsg("Removido com sucesso!");
         } catch (Exception e) {
-            resp.setMsg("Falha ao remover!" + e.getMessage());
+            resp.setMsg("Falha ao remover!");
         }
         return resp;
     }

@@ -11,16 +11,12 @@ import com.api.produto.modelo.RespostaModelo;
 
 public interface ProdutoRepositorio extends JpaRepository<ProdutoModelo, Integer> {
     
-    // listar todos os produtos
     List<ProdutoModelo> findAll();
 
-    // pesquisar por id
     ProdutoModelo findById(int id);
 
-    // remover produto
     RespostaModelo deleteById(int id);
 
-    // cadastrar/alterar produto
     <ProdMod extends ProdutoModelo> ProdMod save(ProdMod obj);
 
 }
