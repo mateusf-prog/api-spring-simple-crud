@@ -2,13 +2,13 @@ package com.api.produto.repositorio;
 
 import java.util.List;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.api.produto.modelo.ProdutoModelo;
 
 // interface responsável por fazer o c.r.u.d no banco de dados
 
-public interface ProdutoRepositorio extends CrudRepository<ProdutoModelo, Integer> {
+public interface ProdutoRepositorio extends JpaRepository<ProdutoModelo, Integer> {
     
     // listar todos os produtos
     List<ProdutoModelo> findAll();

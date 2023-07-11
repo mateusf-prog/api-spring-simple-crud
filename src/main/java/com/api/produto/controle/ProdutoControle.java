@@ -1,9 +1,11 @@
 package com.api.produto.controle;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +20,7 @@ import com.api.produto.repositorio.ProdutoRepositorio;
 public class ProdutoControle {
 
     // ações
-    // o Spring é responsável por criar a instância do objeto(ProdutoRepositorio) e fazer a injeção dessa dependência aqui.
-    @Autowired    
+    @Autowired  // é responsável por criar a instância do objeto(ProdutoRepositorio) e fazer a injeção dessa dependência aqui.
     private ProdutoRepositorio acoes;
     
     // listar produtos
@@ -35,7 +36,16 @@ public class ProdutoControle {
     public @ResponseBody ProdutoModelo cadastrar(@RequestBody ProdutoModelo obj) {
         return acoes.save(obj);
     }
+
+    // filtrar produtos
+    // este método retorna o produto especificado pelo endpoint /produtos/id, onde esse id pode ser usado como uma 'variavel'
+    @GetMapping(value = "/produtos/{id}")
+    public @ResponseBody Optional<ProdutoModelo> filtrar(@PathVariable Integer id) {
+        return acoes.findById(id);
+    }
 }
+
+
 
 /*
  * @GetMapping sera invocado quando uma solicitação GET é feita para o endpoint(/produtos) 
